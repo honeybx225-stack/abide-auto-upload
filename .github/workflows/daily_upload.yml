@@ -39,6 +39,8 @@ jobs:
       - name: 通知上傳失敗
         if: failure()
         run: |
-          curl -s -X POST https://notify-api.line.me/api/notify \
-            -H "Authorization: Bearer ${{ secrets.LINE_NOTIFY_TOKEN }}" \
-            -d "message=%0A❌ Abide 今日上傳失敗%0A時間：$(date '+%Y-%m-%d %H:%M')%0A請到 GitHub Actions 查看原因：https://github.com/honeybx225-stack/abide-auto-upload/actions"
+          curl -s -X POST "https://ntfy.sh/abide-apple-upload-alert-2026" \
+            -H "Title: ❌ Abide 上傳失敗" \
+            -H "Priority: high" \
+            -H "Tags: warning" \
+            -d "$(date '+%Y-%m-%d') 上傳失敗，請更新 Meta Token 或查看 GitHub Actions 記錄。"
