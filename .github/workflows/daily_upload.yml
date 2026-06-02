@@ -35,3 +35,10 @@ jobs:
           git add abide.db
           git diff --staged --quiet || git commit -m "auto: uploaded $(date '+%Y-%m-%d')"
           git push
+
+      - name: 通知上傳失敗
+        if: failure()
+        run: |
+          curl -s -X POST https://notify-api.line.me/api/notify \
+            -H "Authorization: Bearer ${{ secrets.LINE_NOTIFY_TOKEN }}" \
+            -d "message=%0A❌ Abide 今日上傳失敗%0A時間：$(date '+%Y-%m-%d %H:%M')%0A請到 GitHub Actions 查看原因：https://github.com/honeybx225-stack/abide-auto-upload/actions"
