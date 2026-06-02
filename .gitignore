@@ -1,0 +1,11 @@
+__pycache__/
+*.pyc
+*.pickle
+*.pkl
+logs/
+*.jpg
+*.jpeg
+*.png
+*.html
+*.mp4
+vol12_music_brief.html
